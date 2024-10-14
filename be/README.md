@@ -43,3 +43,44 @@
 - 단일 브랜드로 전체 카테고리 상품을 구매할 경우 최저가격인 브랜드와 총액이 얼마인지 확인할 수 있다.
     - 해당 브랜드가 가진 카테고리별 상품들의 최저가격을 구해야 한다.
 - 특정 카테고리에서 최저가격 브랜드와 최고가격 브랜드를 확인하고 각 브랜드 상품의 가격을 확인할 수 있다.
+
+### 브랜드
+
+- Feature: 브랜드 등록
+
+> Scenario: 신규 브랜드를 등록함<br>
+> When 브랜드를 등록하면<br>
+> Then 브랜드 목록 조회 시 등록한 브랜드를 찾을 수 있다<br>
+
+```java
+// POST /brands
+public class BrandCreateRequest {
+    private String name;
+    private Map<Category, Long> productPrices;
+}
+```
+
+- Feature: 브랜드 수정
+
+> Scenario: 브랜드를 수정함<br>
+> Given 브랜드를 등록하고<br>
+> When 브랜드를 수정하면<br>
+> Then 브랜드의 목록 조회 시 해당 브랜드가 수정되어 있다<br>
+
+```java
+// PUT /products/{id}
+public class BrandModifyRequest {
+    private String name;
+}
+```
+
+- Feature: 브랜드 삭제
+
+> Scenario: 브랜드를 삭제함<br>
+> Given 브랜드를 등록하고<br>
+> When 브랜드를 삭제하면<br>
+> Then 브랜드의 목록 조회 시 해당 브랜드를 찾을 수 없다<br>
+
+```java
+// DELETE /products/{id}
+```
