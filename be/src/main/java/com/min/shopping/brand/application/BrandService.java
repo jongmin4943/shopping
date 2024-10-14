@@ -33,8 +33,7 @@ public class BrandService {
     }
 
     public void update(final Long id, final BrandModifyRequest request) {
-        final Brand brand = brandRepository.findById(id)
-                .orElseThrow(() -> new BrandNotExistException("브랜드가 존재하지 않습니다."));
+        final Brand brand = findById(id);
 
         brand.modifyName(request.getName());
 
@@ -42,7 +41,14 @@ public class BrandService {
     }
 
     public void delete(final Long id) {
+        final Brand brand = findById(id);
 
+        brandRepository.delete(brand);
+    }
+
+    private Brand findById(final Long id) {
+        return brandRepository.findById(id)
+                .orElseThrow(() -> new BrandNotExistException("브랜드가 존재하지 않습니다."));
     }
 
 }

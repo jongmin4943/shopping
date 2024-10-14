@@ -68,7 +68,7 @@ public class BrandCreateRequest {
 > Then 브랜드의 목록 조회 시 해당 브랜드가 수정되어 있다<br>
 
 ```java
-// PUT /products/{id}
+// PUT /brands/{id}
 public class BrandModifyRequest {
     private String name;
 }
@@ -82,5 +82,5 @@ public class BrandModifyRequest {
 > Then 브랜드의 목록 조회 시 해당 브랜드를 찾을 수 없다<br>
 
 ```java
-// DELETE /products/{id}
+// DELETE /brands/{id}
 ```

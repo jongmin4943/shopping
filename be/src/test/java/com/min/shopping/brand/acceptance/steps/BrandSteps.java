@@ -48,7 +48,7 @@ public class BrandSteps {
     ) {
         return RestAssured
                 .given().pathParam("id", brandId)
-                .when().delete("/products/{id}")
+                .when().delete("/brands/{id}")
                 .then().extract();
     }
 
