@@ -11,4 +11,11 @@ public interface BrandRepository {
     List<Brand> findAll();
 
     Optional<Brand> findById(Long id);
+
+    boolean existsByName(BrandName name);
+
+    default boolean existsByName(String name) {
+        return existsByName(new BrandName(name));
+    }
+
 }
