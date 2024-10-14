@@ -1,6 +1,8 @@
 package com.min.shopping.brand.exception;
 
-public class BrandNotExistException extends RuntimeException {
+import com.min.shopping.common.exception.NotFoundException;
+
+public class BrandNotExistException extends NotFoundException {
     public BrandNotExistException(final String message) {
         super(message);
     }
