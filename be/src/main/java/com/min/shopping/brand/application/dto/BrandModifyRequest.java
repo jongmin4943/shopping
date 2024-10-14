@@ -11,4 +11,8 @@ public class BrandModifyRequest {
 
     @NotEmpty(message = "브랜드 이름은 필수값 입니다.")
     private String name;
+
+    public BrandModifyRequest(final String name) {
+        this.name = name;
+    }
 }

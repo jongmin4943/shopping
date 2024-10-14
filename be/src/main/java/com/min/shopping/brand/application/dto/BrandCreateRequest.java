@@ -17,5 +17,9 @@ public class BrandCreateRequest {
     private String name;
 
     @NotNull(message = "카테고리별 상품 가격은 필수값 입니다.")
-    private Map<Category, Integer> productPrices;
+    private Map<Category, Long> productPrices;
+
+    public BrandCreateRequest(final String name) {
+        this.name = name;
+    }
 }

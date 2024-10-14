@@ -21,7 +21,7 @@ public class BrandService {
     public BrandResponse save(final BrandCreateRequest request) {
         final Brand brand = new Brand(request.getName());
 
-        checkDuplicateName(brand);
+        checkDuplicateName(brand.getName());
 
         final Brand saved = brandRepository.save(brand);
 
@@ -31,15 +31,15 @@ public class BrandService {
     public void update(final Long id, final BrandModifyRequest request) {
         final Brand brand = findById(id);
 
-        checkDuplicateName(brand);
+        checkDuplicateName(request.getName());
 
         brand.modifyName(request.getName());
 
         brandRepository.save(brand);
     }
 
-    private void checkDuplicateName(final Brand brand) {
-        if (brandRepository.existsByName(brand.getName())) {
+    private void checkDuplicateName(final String name) {
+        if (brandRepository.existsByName(name)) {
             throw new BrandCreateException("이미 존재하는 브랜드 이름입니다.");
         }
     }
