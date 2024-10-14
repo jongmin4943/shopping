@@ -5,6 +5,7 @@ import com.min.shopping.brand.application.dto.BrandModifyRequest;
 import com.min.shopping.brand.application.dto.BrandResponse;
 import com.min.shopping.brand.domain.Brand;
 import com.min.shopping.brand.domain.BrandRepository;
+import com.min.shopping.brand.exception.BrandNotExistException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,12 @@ public class BrandService {
     }
 
     public void update(final Long id, final BrandModifyRequest request) {
+        final Brand brand = brandRepository.findById(id)
+                .orElseThrow(() -> new BrandNotExistException("브랜드가 존재하지 않습니다."));
 
+        brand.modifyName(request.getName());
+
+        brandRepository.save(brand);
     }
 
     public void delete(final Long id) {

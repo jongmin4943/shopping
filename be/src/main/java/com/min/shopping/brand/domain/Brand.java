@@ -27,4 +27,8 @@ public class Brand {
     public String getName() {
         return name.getName();
     }
+
+    public void modifyName(final String name) {
+        this.name = new BrandName(name);
+    }
 }
