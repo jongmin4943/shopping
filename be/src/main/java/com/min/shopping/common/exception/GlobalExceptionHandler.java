@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 
 @RestControllerAdvice
@@ -29,10 +30,17 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
+    @ExceptionHandler(NoResourceFoundException.class)
+    protected ResponseEntity<ErrorResponse> handleNoResourceFoundException(final NoResourceFoundException e) {
+        logger.error("GlobalExceptionHandler.NoResourceFoundException", e);
+        final ErrorResponse errorResponse = ErrorResponse.of("존재하지 않는 주소입니다.", HttpStatus.NOT_FOUND);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+    }
+
     @ExceptionHandler(Exception.class)
     protected ResponseEntity<?> handleUnexpectedException(final Exception e) {
         logger.error("GlobalExceptionHandler.handleUnexpectedException", e);
-        final ErrorResponse errorResponse = ErrorResponse.of(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        final ErrorResponse errorResponse = ErrorResponse.of("알 수 없는 에러가 발생했습니다.", HttpStatus.INTERNAL_SERVER_ERROR);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
     }
 }
