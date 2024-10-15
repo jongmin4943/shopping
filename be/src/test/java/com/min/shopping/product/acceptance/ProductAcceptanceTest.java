@@ -8,7 +8,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
-import java.util.Map;
 
 import static com.min.shopping.brand.acceptance.steps.BrandSteps.브랜드_등록_요청;
 import static com.min.shopping.core.AcceptanceTestUtils.등록_식별자_추출;
@@ -33,7 +32,7 @@ class ProductAcceptanceTest {
 
     @BeforeEach
     void setUp() {
-        final var 브랜드_등록_요청 = 브랜드_등록_요청("test", Map.of());
+        final var 브랜드_등록_요청 = 브랜드_등록_요청("test");
         브랜드_식별자 = 등록_식별자_추출(브랜드_등록_요청);
     }
 

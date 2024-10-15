@@ -1,7 +1,6 @@
 package com.min.shopping.brand.acceptance;
 
 import com.min.shopping.brand.application.dto.BrandResponse;
-import com.min.shopping.common.Category;
 import com.min.shopping.core.AcceptanceTest;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -9,20 +8,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
-import java.util.Map;
 
 import static com.min.shopping.brand.acceptance.steps.BrandSteps.브랜드_등록_요청;
 import static com.min.shopping.brand.acceptance.steps.BrandSteps.브랜드_목록_조회_요청;
 import static com.min.shopping.brand.acceptance.steps.BrandSteps.브랜드_삭제_요청;
 import static com.min.shopping.brand.acceptance.steps.BrandSteps.브랜드_수정_요청;
-import static com.min.shopping.common.Category.ACCESSORY;
-import static com.min.shopping.common.Category.BAG;
-import static com.min.shopping.common.Category.HAT;
-import static com.min.shopping.common.Category.OUTER;
-import static com.min.shopping.common.Category.PANTS;
-import static com.min.shopping.common.Category.SNEAKERS;
-import static com.min.shopping.common.Category.SOCKS;
-import static com.min.shopping.common.Category.TOP;
 import static com.min.shopping.core.AcceptanceTestUtils.등록_식별자_추출;
 import static com.min.shopping.core.AcceptanceTestUtils.등록요청_성공;
 import static com.min.shopping.core.AcceptanceTestUtils.삭제요청_성공;
@@ -35,16 +25,6 @@ class BrandAcceptanceTest {
 
     private static final String 브랜드이름 = "브랜드";
     private static final String 수정된_브랜드이름 = "수정된 브랜드";
-    private static final Map<Category, Long> 카테고리별_최초_가격 = Map.of(
-            TOP, 10_000L,
-            OUTER, 5_000L,
-            PANTS, 4_000L,
-            SNEAKERS, 9_000L,
-            BAG, 2_000L,
-            HAT, 1_000L,
-            SOCKS, 500L,
-            ACCESSORY, 3_500L
-    );
 
     /**
      * When 브랜드를 등록하면
@@ -55,7 +35,7 @@ class BrandAcceptanceTest {
     @Test
     void 브랜드_등록_테스트() {
         // when
-        final var 브랜드_등록_응답 = 브랜드_등록_요청(브랜드이름, 카테고리별_최초_가격);
+        final var 브랜드_등록_응답 = 브랜드_등록_요청(브랜드이름);
 
         // then
         등록요청_성공(브랜드_등록_응답);
@@ -74,7 +54,7 @@ class BrandAcceptanceTest {
     @Test
     void 브랜드_수정_테스트() {
         // given
-        final var 브랜드_등록_응답 = 브랜드_등록_요청(브랜드이름, 카테고리별_최초_가격);
+        final var 브랜드_등록_응답 = 브랜드_등록_요청(브랜드이름);
 
         // when
         final var 브랜드_수정_응답 = 브랜드_수정_요청(등록_식별자_추출(브랜드_등록_응답), 수정된_브랜드이름);
@@ -93,7 +73,7 @@ class BrandAcceptanceTest {
     @Test
     void 브랜드_삭제_테스트() {
         // given
-        final var 브랜드_등록_응답 = 브랜드_등록_요청(브랜드이름, 카테고리별_최초_가격);
+        final var 브랜드_등록_응답 = 브랜드_등록_요청(브랜드이름);
 
         // when
         final var 브랜드_삭제_응답 = 브랜드_삭제_요청(등록_식별자_추출(브랜드_등록_응답));

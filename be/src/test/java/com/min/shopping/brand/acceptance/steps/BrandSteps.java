@@ -1,6 +1,5 @@
 package com.min.shopping.brand.acceptance.steps;
 
-import com.min.shopping.common.Category;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -11,10 +10,9 @@ import java.util.Map;
 public class BrandSteps {
 
     public static ExtractableResponse<Response> 브랜드_등록_요청(
-            final String name,
-            final Map<Category, Long> productPrices
+            final String name
     ) {
-        final Map<String, ?> body = Map.of("name", name, "productPrices", productPrices);
+        final Map<String, ?> body = Map.of("name", name);
         return RestAssured
                 .given()
                 .body(body)
