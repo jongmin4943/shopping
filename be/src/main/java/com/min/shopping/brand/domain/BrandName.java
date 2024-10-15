@@ -13,7 +13,7 @@ public class BrandName {
     public static final int MAX_LENGTH = 100;
 
     @Getter
-    @Column(name = "name", length = MAX_LENGTH)
+    @Column(name = "name", length = MAX_LENGTH, unique = true, nullable = false)
     private String name;
 
     protected BrandName() {
