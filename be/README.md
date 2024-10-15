@@ -33,9 +33,9 @@
     - 브랜드 및 카테고리별 상품은 여러개가 될 수 있다. (ex. A 브랜드의 바지 종류가 여러개)
 - 상품을 추가 / 업데이트 / 삭제 할 수 있다.
     - 상품 추가 시 가격과 어떤 브랜드의 어떤 카테고리인지를 받는다.
-    - 상품은 가격과 브랜드, 카테고리를 변경할 수 있다.
+    - 상품은 가격과 카테고리를 변경할 수 있다.
         - 가격은 0 미만이 될 수 없다.
-        - 브랜드/카테고리 변경 시 해당 브랜드의 카테고리에 상품이 0개가 될 수 없다.
+        - 카테고리 변경 시 해당 브랜드의 카테고리에 상품이 0개가 될 수 없다.
     - 상품을 삭제할 수 있다.
         - 해당 브랜드의 카테고리에 상품이 0개가 될 수 없다.
 - 카테고리 별 최저가격인 브랜드와 가격을 조회하고 총액이 얼마인지 확인할 수 있다.
@@ -83,4 +83,58 @@ public class BrandModifyRequest {
 
 ```java
 // DELETE /brands/{id}
+```
+
+### 상품
+
+- Feature: 상품 등록
+
+> Scenario: 상품을 등록함<br>
+> When 상품을 등록하면<br>
+> Then 상품 상세 조회 시 등록한 상품이 조회된다<br>
+
+```java
+// POST /products
+public class ProductCreateRequest {
+    private Long brandId;
+    private Category category;
+    private long price;
+}
+```
+
+- Feature: 상품 상세 조회
+
+> Scenario: 상품 상세를 조회함<br>
+> Given 상품을 등록하고<br>
+> When 상품을 상세 조회하면<br>
+> Then 등록된 상품의 상세가 조회된다<br>
+
+```java
+// get /products/{id}
+```
+
+- Feature: 상품 수정
+
+> Scenario: 상품을 수정함<br>
+> Given 상품을 등록하고<br>
+> When 상품을 수정하면<br>
+> Then 상품 상세 조회 시 수정 된 상품이 조회된다<br>
+
+```java
+// PUT /products/{id}
+public class ProductModifyRequest {
+    private Category category;
+    private long price;
+}
+```
+
+- Feature: 브랜드 삭제
+
+> Scenario: 상품을 삭제함<br>
+> Given 상품을 등록하고<br>
+> When 상품을 삭제하면<br>
+> Then 상품 상세 조회 시 조회할 수 없다는 에러가 발생한다<br>
+
+```java
+// DELETE /products/{id}
 ```
