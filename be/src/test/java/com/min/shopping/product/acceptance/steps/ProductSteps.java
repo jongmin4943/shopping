@@ -6,6 +6,7 @@ import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
 import org.springframework.http.MediaType;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 public class ProductSteps {
@@ -13,7 +14,7 @@ public class ProductSteps {
     public static ExtractableResponse<Response> 상품_등록_요청(
             final String brandId,
             final Category category,
-            final long price
+            final BigDecimal price
     ) {
         final Map<String, ?> body = Map.of("brandId", brandId, "category", category, "price", price);
         return RestAssured
@@ -36,7 +37,7 @@ public class ProductSteps {
     public static ExtractableResponse<Response> 상품_수정_요청(
             final String productId,
             final Category category,
-            final long price
+            final BigDecimal price
     ) {
         final Map<String, ?> body = Map.of("category", category, "price", price);
         return RestAssured

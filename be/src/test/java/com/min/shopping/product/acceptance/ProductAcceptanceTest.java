@@ -3,12 +3,11 @@ package com.min.shopping.product.acceptance;
 import com.min.shopping.common.Category;
 import com.min.shopping.core.AcceptanceTest;
 import com.min.shopping.product.application.dto.ProductResponse;
-import io.restassured.response.ExtractableResponse;
-import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import static com.min.shopping.brand.acceptance.steps.BrandSteps.브랜드_등록_요청;
@@ -27,8 +26,8 @@ import static org.assertj.core.api.SoftAssertions.assertSoftly;
 @AcceptanceTest
 class ProductAcceptanceTest {
 
-    private static final long 가방가격 = 1_000L;
-    private static final long 모자가격 = 2_000L;
+    private static final BigDecimal 가방가격 = BigDecimal.valueOf(1_000L);
+    private static final BigDecimal 모자가격 = BigDecimal.valueOf(2_000L);
 
     private String 브랜드_식별자;
 
@@ -96,12 +95,12 @@ class ProductAcceptanceTest {
         상품_상세_조회_시_상품을_찾을_수_없다(상품_식별자);
     }
 
-    private void 상품_상세_조회_시_상품을_찾을_수_있다(final String productId, final Category category, final long price) {
+    private void 상품_상세_조회_시_상품을_찾을_수_있다(final String productId, final Category category, final BigDecimal price) {
         final ProductResponse productResponse = 상품_상세_조회_요청(productId).as(ProductResponse.class);
 
         assertSoftly(softly -> {
             softly.assertThat(productResponse.getCategory()).isEqualTo(category);
-            softly.assertThat(productResponse.getPrice()).isEqualTo(price);
+            softly.assertThat(productResponse.getPrice()).isEqualByComparingTo(price);
         });
     }
 
