@@ -9,4 +9,7 @@ public interface ProductRepository {
     void delete(Product product);
 
     Optional<Product> findById(Long id);
+
+    int countProductCategoryTypesByBrand(Long brandId);
+
 }
