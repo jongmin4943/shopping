@@ -3,23 +3,34 @@ package com.min.shopping.product.application;
 import com.min.shopping.product.application.dto.ProductCreateRequest;
 import com.min.shopping.product.application.dto.ProductModifyRequest;
 import com.min.shopping.product.application.dto.ProductResponse;
+import com.min.shopping.product.domain.Product;
+import com.min.shopping.product.domain.ProductRepository;
+import com.min.shopping.product.exception.ProductNotExistException;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
+@RequiredArgsConstructor
 public class ProductService {
 
-    public ProductResponse save(final @Valid ProductCreateRequest request) {
-        return null;
+    private final ProductRepository productRepository;
+
+    public ProductResponse save(final ProductCreateRequest request) {
+        final Product product = new Product(request.getBrandId(), request.getCategory(), request.getPrice());
+
+        final Product saved = productRepository.save(product);
+
+        return ProductResponse.from(saved);
     }
 
-    public List<ProductResponse> findById(final Long id) {
-        return null;
+    public ProductResponse findById(final Long id) {
+        final Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotExistException("상품이 존재하지 않습니다."));
+        return ProductResponse.from(product);
     }
 
-    public void update(final Long id, final @Valid ProductModifyRequest request) {
+    public void update(final Long id, final ProductModifyRequest request) {
 
     }
 
