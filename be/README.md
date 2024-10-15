@@ -98,7 +98,7 @@ public class BrandModifyRequest {
 public class ProductCreateRequest {
     private Long brandId;
     private Category category;
-    private long price;
+    private BigDecimal price;
 }
 ```
 
@@ -124,7 +124,7 @@ public class ProductCreateRequest {
 // PUT /products/{id}
 public class ProductModifyRequest {
     private Category category;
-    private long price;
+    private BigDecimal price;
 }
 ```
 

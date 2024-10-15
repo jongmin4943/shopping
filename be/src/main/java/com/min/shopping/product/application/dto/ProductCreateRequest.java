@@ -6,6 +6,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ProductCreateRequest {
@@ -16,6 +18,7 @@ public class ProductCreateRequest {
     @NotNull(message = "카테고리는 필수값 입니다.")
     private Category category;
 
-    private long price;
+    @NotNull(message = "가격은 필수값 입니다.")
+    private BigDecimal price;
 
 }

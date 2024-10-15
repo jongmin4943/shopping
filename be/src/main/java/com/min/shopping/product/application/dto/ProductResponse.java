@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Getter
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -13,5 +15,5 @@ public class ProductResponse {
     private Long id;
     private Long brandId;
     private Category category;
-    private long price;
+    private BigDecimal price;
 }
