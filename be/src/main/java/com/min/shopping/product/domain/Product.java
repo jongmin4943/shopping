@@ -37,27 +37,29 @@ public class Product {
     private ProductPrice price;
 
     public Product(final Long brandId, final Category category, final BigDecimal price) {
-        validate(brandId, category, price);
+        validate(brandId, category);
         this.brandId = brandId;
         this.category = category;
         this.price = new ProductPrice(price);
     }
 
-    private void validate(final Long brandId, final Category category, final BigDecimal price) {
+    private void validate(final Long brandId, final Category category) {
         if (brandId == null) {
             throw new ProductCreateException("상품의 브랜드는 필수값 입니다.");
         }
 
+        validateCategory(category);
+    }
+
+    public void modify(final Category category, final BigDecimal price) {
+        validateCategory(category);
+        this.category = category;
+        this.price = new ProductPrice(price);
+    }
+
+    private void validateCategory(final Category category) {
         if (category == null) {
             throw new ProductCreateException("상품의 카테고리는 필수값 입니다.");
-        }
-
-        if (price == null) {
-            throw new ProductCreateException("상품의 가격은 필수값 입니다.");
-        }
-
-        if (price.compareTo(BigDecimal.ZERO) < 0) {
-            throw new ProductCreateException("가격은 0보다 작을 수 없습니다.");
         }
     }
 
