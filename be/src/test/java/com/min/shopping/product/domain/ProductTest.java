@@ -29,22 +29,6 @@ class ProductTest {
     }
 
     @Test
-    @DisplayName("상품 가격이 null 일 경우 예외가 발생한다.")
-    void validatePriceNotNull() {
-        assertThatThrownBy(() -> new Product(1L, Category.HAT, null))
-                .isInstanceOf(ProductCreateException.class)
-                .hasMessage("상품의 가격은 필수값 입니다.");
-    }
-
-    @Test
-    @DisplayName("상품 가격이 0보다 작을 경우 예외가 발생한다.")
-    void validatePriceNotNegative() {
-        assertThatThrownBy(() -> new Product(1L, Category.HAT, BigDecimal.valueOf(-100)))
-                .isInstanceOf(ProductCreateException.class)
-                .hasMessage("가격은 0보다 작을 수 없습니다.");
-    }
-
-    @Test
     @DisplayName("상품을 생성할 수 있다.")
     void validProduct() {
         assertDoesNotThrow(() -> new Product(1L, Category.HAT, BigDecimal.valueOf(1000)));

@@ -3,6 +3,7 @@ package com.min.shopping.product.domain;
 import com.min.shopping.common.Category;
 import com.min.shopping.product.exception.ProductCreateException;
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -32,15 +33,14 @@ public class Product {
     @Getter
     private Category category;
 
-    @Column(nullable = false)
-    @Getter
-    private BigDecimal price;
+    @Embedded
+    private ProductPrice price;
 
     public Product(final Long brandId, final Category category, final BigDecimal price) {
         validate(brandId, category, price);
         this.brandId = brandId;
         this.category = category;
-        this.price = price;
+        this.price = new ProductPrice(price);
     }
 
     private void validate(final Long brandId, final Category category, final BigDecimal price) {
@@ -59,8 +59,9 @@ public class Product {
         if (price.compareTo(BigDecimal.ZERO) < 0) {
             throw new ProductCreateException("가격은 0보다 작을 수 없습니다.");
         }
-
     }
 
-
+    public BigDecimal getPrice() {
+        return price.getPrice();
+    }
 }
