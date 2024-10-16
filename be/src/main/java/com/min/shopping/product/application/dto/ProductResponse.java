@@ -1,8 +1,8 @@
 package com.min.shopping.product.application.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.min.shopping.common.Category;
 import com.min.shopping.product.domain.Product;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,8 +10,9 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 
 @Getter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
+@AllArgsConstructor
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductResponse {
     private Long id;
     private Long brandId;

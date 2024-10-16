@@ -5,6 +5,7 @@ import com.min.shopping.brand.application.dto.BrandCreateRequest;
 import com.min.shopping.brand.application.dto.BrandModifyRequest;
 import com.min.shopping.brand.application.dto.BrandResponse;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,13 +21,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/brands")
+@RequiredArgsConstructor
 public class BrandController {
 
     private final BrandService brandService;
-
-    public BrandController(final BrandService brandService) {
-        this.brandService = brandService;
-    }
 
     @PostMapping
     public ResponseEntity<BrandResponse> createBrand(@RequestBody @Valid final BrandCreateRequest request) {

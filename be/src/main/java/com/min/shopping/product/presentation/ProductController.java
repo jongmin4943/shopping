@@ -5,6 +5,7 @@ import com.min.shopping.product.application.dto.ProductCreateRequest;
 import com.min.shopping.product.application.dto.ProductModifyRequest;
 import com.min.shopping.product.application.dto.ProductResponse;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,13 +20,10 @@ import java.net.URI;
 
 @RestController
 @RequestMapping("/products")
+@RequiredArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
-
-    public ProductController(final ProductService productService) {
-        this.productService = productService;
-    }
 
     @PostMapping
     public ResponseEntity<ProductResponse> createProduct(@RequestBody @Valid final ProductCreateRequest request) {
