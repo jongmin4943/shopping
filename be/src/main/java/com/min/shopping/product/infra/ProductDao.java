@@ -27,20 +27,23 @@ public class ProductDao {
 
     public Optional<ProductLowestPricesResponse> findLowestPriceProductsByCategory() {
         final String sql = """
-                SELECT p.id,
-                       p.category,
-                       p.price,
-                       b.id AS brand_id,
-                       b.name AS brand_name
-                FROM product p
-                         JOIN brand b ON p.brand_id = b.id
-                         JOIN (SELECT category, MIN(p2.price) AS min_price
-                               FROM product p2
-                                        JOIN brand b2 ON p2.brand_id = b2.id
-                               WHERE b2.status = 'ACTIVE'
-                               GROUP BY category) AS min_prices ON p.category = min_prices.category AND p.price = min_prices.min_price
-                WHERE b.status = 'ACTIVE'
-                ORDER BY p.category
+                WITH LowestPricePerCategory AS (SELECT p.id,
+                                                       p.category,
+                                                       b.id                                                         AS brand_id,
+                                                       b.name                                                       AS brand_name,
+                                                       p.price,
+                                                       ROW_NUMBER() OVER (PARTITION BY p.CATEGORY ORDER BY p.PRICE) AS rn
+                                                FROM PRODUCT p
+                                                         JOIN BRAND b ON p.BRAND_ID = b.ID
+                                                where b.STATUS = 'ACTIVE')
+                SELECT id,
+                       category,
+                       brand_id,
+                       brand_name,
+                       price
+                FROM LowestPricePerCategory
+                WHERE rn = 1
+                ORDER BY CATEGORY
                 """;
 
         return queryForSingleResult(sql, PRODUCT_LOWEST_PRICES_RESPONSE_ROW_MAPPER);
