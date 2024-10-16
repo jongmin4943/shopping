@@ -57,4 +57,24 @@ public class ProductSteps {
                 .then().extract();
     }
 
+    public static ExtractableResponse<Response> 카테고리별_최저가격_브랜드_상품_조회_요청() {
+        return RestAssured
+                .given()
+                .when().get("/products/lowest-prices")
+                .then().extract();
+    }
+
+    public static ExtractableResponse<Response> 단일_브랜드_전체_카테고리_최저가격_조회_요청() {
+        return RestAssured
+                .given()
+                .when().get("/products/lowest-prices-for-single-brand")
+                .then().extract();
+    }
+
+    public static ExtractableResponse<Response> 특정_카테고리_최저_최고_가격_상품_브랜드_조회_요청(final Category category) {
+        return RestAssured
+                .given().pathParam("category", category)
+                .when().get("/products/price-range/{category}")
+                .then().extract();
+    }
 }
