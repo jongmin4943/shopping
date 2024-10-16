@@ -138,3 +138,36 @@ public class ProductModifyRequest {
 ```java
 // DELETE /products/{id}
 ```
+
+- Feature: 카테고리별 최저가격 브랜드 상품 조회
+
+> Scenario: 카테고리별 최저가격 브랜드 상품 조회을 조회함<br>
+> Given 초기 데이터를 셋팅하고<br>
+> When 카테고리 별로 최저가격인 브랜드와 가격을 조회하고 총액이 얼마인지 조회하면<br>
+> Then 결과를 확인할 수 있다<br>
+
+```java
+// GET /products/lowest-prices
+```
+
+- Feature: 단일 브랜드 전체 카테고리 최저가격 조회
+
+> Scenario: 단일 브랜드 전체 카테고리 최저가격 조회을 조회함<br>
+> Given 초기 데이터를 셋팅하고<br>
+> When 단일 브랜드로 전체 카테고리 상품을 구매할 경우 최저가격인 브랜드와 총액이 얼마인지 조회하면<br>
+> Then 결과를 확인할 수 있다<br>
+
+```java
+// GET /products/lowest-prices-for-single-brand
+```
+
+- Feature: 특정 카테고리에서 최저가격 브랜드와 최고가격 브랜드를 확인하고 각 브랜드 상품의 가격을 조회
+
+> Scenario: 특정 카테고리에서 최저가격 브랜드와 최고가격 브랜드를 확인하고 각 브랜드 상품의 가격을 조회함<br>
+> Given 초기 데이터를 셋팅하고<br>
+> When 특정 카테고리에서 최저가격 브랜드와 최고가격 브랜드를 확인하고 각 브랜드 상품의 가격을 조회하면<br>
+> Then 결과를 확인할 수 있다<br>
+
+```java
+// GET /products/price-range/{category}
+```
