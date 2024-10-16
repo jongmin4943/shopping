@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 
@@ -25,15 +26,22 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BindException.class)
     protected ResponseEntity<ErrorResponse> handleBindExceptionException(final BindException e) {
         logger.error("GlobalExceptionHandler.handleMethodArgumentNotValidException", e);
-        String errorMessage = e.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
+        final String errorMessage = e.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
         final ErrorResponse errorResponse = ErrorResponse.of(errorMessage, HttpStatus.BAD_REQUEST);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
     @ExceptionHandler(NoResourceFoundException.class)
     protected ResponseEntity<ErrorResponse> handleNoResourceFoundException(final NoResourceFoundException e) {
-        logger.error("GlobalExceptionHandler.NoResourceFoundException", e);
+        logger.error("GlobalExceptionHandler.handleNoResourceFoundException", e);
         final ErrorResponse errorResponse = ErrorResponse.of("존재하지 않는 주소입니다.", HttpStatus.NOT_FOUND);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    protected ResponseEntity<ErrorResponse> handleMethodArgumentTypeMismatchException(final MethodArgumentTypeMismatchException e) {
+        logger.error("GlobalExceptionHandler.handleMethodArgumentTypeMismatchException", e);
+        final ErrorResponse errorResponse = ErrorResponse.of("잘못 된 요청입니다.", HttpStatus.BAD_REQUEST);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
