@@ -7,8 +7,8 @@ insert into BRAND (NAME, STATUS) values ('F', 'ACTIVE');
 insert into BRAND (NAME, STATUS) values ('G', 'ACTIVE');
 insert into BRAND (NAME, STATUS) values ('H', 'ACTIVE');
 insert into BRAND (NAME, STATUS) values ('I', 'ACTIVE');
-insert into BRAND (NAME, STATUS) values ('J', 'ACTIVE');
-insert into BRAND (NAME, STATUS) values ('K', 'ACTIVE');
+insert into BRAND (NAME, STATUS) values ('J', 'INACTIVE');
+insert into BRAND (NAME, STATUS) values ('K', 'INACTIVE');
 
 -- A 브랜드
 insert into PRODUCT (PRICE, BRAND_ID, CATEGORY) values (11200.00, 1, 'TOP');
