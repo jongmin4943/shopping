@@ -126,7 +126,7 @@ public class ProductModifyRequest {
 }
 ```
 
-- Feature: 브랜드 삭제
+- Feature: 상품 삭제
 
 > Scenario: 상품을 삭제함<br>
 > Given 상품을 등록하고<br>
