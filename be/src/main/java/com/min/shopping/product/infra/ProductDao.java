@@ -27,21 +27,21 @@ public class ProductDao {
 
     public Optional<ProductLowestPricesResponse> findLowestPriceProductsByCategory() {
         final String sql = """
-                WITH LowestPricePerCategory AS (SELECT p.id,
-                                                       p.category,
-                                                       b.id                                                         AS brand_id,
-                                                       b.name                                                       AS brand_name,
-                                                       p.price,
-                                                       ROW_NUMBER() OVER (PARTITION BY p.CATEGORY ORDER BY p.PRICE) AS rn
-                                                FROM PRODUCT p
-                                                         JOIN BRAND b ON p.BRAND_ID = b.ID
-                                                where b.STATUS = 'ACTIVE')
+                WITH lowest_price_per_category AS (SELECT p.id,
+                                                      p.category,
+                                                      b.id                                                         AS brand_id,
+                                                      b.name                                                       AS brand_name,
+                                                      p.price,
+                                                      ROW_NUMBER() OVER (PARTITION BY p.CATEGORY ORDER BY p.PRICE) AS rn
+                                               FROM product p
+                                                        JOIN BRAND b ON p.BRAND_ID = b.ID
+                                               where b.STATUS = 'ACTIVE')
                 SELECT id,
                        category,
                        brand_id,
                        brand_name,
                        price
-                FROM LowestPricePerCategory
+                FROM lowest_price_per_category
                 WHERE rn = 1
                 ORDER BY CATEGORY
                 """;
