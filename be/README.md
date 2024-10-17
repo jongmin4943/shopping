@@ -39,9 +39,9 @@
 - 집계
     - 집계는 브랜드가 카테고리별 상품을 최소 1개이상 가지고 있을때만 포함한다. (ACTIVE 상태)
     - 카테고리 별 최저가격인 브랜드와 가격을 조회하고 총액이 얼마인지 확인할 수 있다.
-      - 각 브랜드별로 카테고리의 상품은 여러개이다. 그 중에 최저 가격인 상품을 찾아야 한다.
+        - 각 브랜드별로 카테고리의 상품은 여러개이다. 그 중에 최저 가격인 상품을 찾아야 한다.
     - 단일 브랜드로 전체 카테고리 상품을 구매할 경우 최저가격인 브랜드와 총액이 얼마인지 확인할 수 있다.
-      - 해당 브랜드가 가진 카테고리별 상품들의 최저가격을 구해야 한다.
+        - 해당 브랜드가 가진 카테고리별 상품들의 최저가격을 구해야 한다.
     - 특정 카테고리에서 최저가격 브랜드와 최고가격 브랜드를 확인하고 각 브랜드 상품의 가격을 확인할 수 있다.
 
 ### 브랜드
@@ -171,3 +171,20 @@ public class ProductModifyRequest {
 ```java
 // GET /products/price-range/{category}
 ```
+
+## 코드 테스트
+
+- 브랜드 등록/수정/삭제 관련 테스트 -> BrandAcceptanceTest
+- 상품 등록/수정/삭제 관련 테스트 -> ProductAcceptanceTest
+- 상품 집계 관련 테스트 -> ProductPriceAcceptanceTest
+
+## 실행 방법
+
+- ShoppingApplication 를 실행합니다.
+- 요구사항 1번 -> http://localhost:8080/products/lowest-prices
+- 요구사항 2번 -> http://localhost:8080/products/lowest-prices-for-single-brand
+- 요구사항 3번 -> http://localhost:8080/products/price-range/TOP
+    - `TOP` 은 다른 카테고리로 변경가능합니다.
+
+## 추가사항
+
