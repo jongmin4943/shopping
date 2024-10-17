@@ -1,11 +1,9 @@
 package com.min.shopping.product.infra;
 
-import com.min.shopping.common.Category;
 import com.min.shopping.product.application.dto.ProductLowestPriceForSingleBrandResponse;
 import com.min.shopping.product.application.dto.ProductResponse;
 import org.springframework.jdbc.core.RowMapper;
 
-import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
