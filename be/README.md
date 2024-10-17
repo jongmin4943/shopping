@@ -178,6 +178,11 @@ public class ProductModifyRequest {
 
 ## 실행 방법
 
+- JDK 17 이 필요합니다.
+- 프로젝트를 clone 받습니다.
+  ```bash
+    git clone https://github.com/jongmin4943/shopping.git
+  ```
 - ShoppingApplication 를 실행합니다.
 - 요구사항 1번 -> http://localhost:8080/products/lowest-prices
 - 요구사항 2번 -> http://localhost:8080/products/lowest-prices-for-single-brand
